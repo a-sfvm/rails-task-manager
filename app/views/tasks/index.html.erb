@@ -1,22 +1,31 @@
-<h1>My tasks</h1>
 
-<ul class="list-group">
-    <% @tasks.each do |task| %>
-      <li class="list-group-item">
-        <% if task.completed %>
-          <i class="fa-regular fa-square-check"></i>
-        <% else %>
-          <i class="fa-regular fa-square"></i>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">My tasks</h2>
+    </div>
+    <div class="modal-body">
+      <ul class="list-group">
+        <% @tasks.each do |task| %>
+          <li class="list-group-item">
+            <% if task.completed %>
+              <i class="fa-regular fa-square-check"></i>
+            <% else %>
+              <i class="fa-regular fa-square"></i>
+            <% end %>
+            <label for="tasks">
+            <%= link_to task.title, task_path(task.id) %>
+            <%= link_to task_path(task),
+             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <i class="fa-regular fa-trash-can"></i>
+              <% end %>
+            </label>
+          </li>
         <% end %>
-        <label for="tasks">
-          <%= link_to task.title, task_path(task.id) %>
-          <%= link_to task_path(task),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-            <i class="fa-regular fa-trash-can"></i>
-          <% end %>
-        </label>
-      </li>
-    <% end %>
-</ul>
-
-<button type="button" class="btn btn-outline-primary my-3"><%= link_to "Add a new task", new_task_path %></button>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-warning my-3"><%= link_to "Add a new task", new_task_path %></button>
+    </div>
+  </div>
+</div>

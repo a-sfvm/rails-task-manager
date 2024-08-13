@@ -1,22 +1,29 @@
-<h1> <%= @task.title %> </h1>
-<h3> <%= @task.details %> </h3>
 
-<% if @task.completed == true %>
+  <% if @task.completed == true %>
     <% @completed_message = "This task is completed" %>
   <% else %>
     <% @completed_message = "This task is not completed yet" %>
   <% end %>
 
-<div>
-  <% if @task.completed == true %>
-    <input type="checkbox" id="tasks" name="scales" checked/>
-  <% else %>
-    <input type="checkbox" id="tasks" name="scales"/>
-  <% end %>
-  <label for="tasks"><%= "#{@completed_message}" %></label>
-</div>
-
-<%= link_to "Edit this task", edit_task_path(@task.id) %>
-<%= link_to "Back to list", tasks_path %>
-
-
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title"> <%= @task.title %> </h3>
+      </div>
+      <div class="modal-body">
+        <p> <%= @task.details %> </p>
+        <div>
+           <% if @task.completed == true %>
+            <input type="checkbox" id="tasks" name="scales" checked/>
+          <% else %>
+            <input type="checkbox" id="tasks" name="scales"/>
+          <% end %>
+          <label for="tasks"><%= "#{@completed_message}" %></label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal"><%= link_to "Edit this task", edit_task_path(@task.id) %></button>
+        <button type="button" class="btn btn btn-outline-warning"><%= link_to "Back to list", tasks_path %></button>
+      </div>
+    </div>
+  </div>
